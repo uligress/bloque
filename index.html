@@ -53,7 +53,7 @@ header.scrolled{border-color:var(--line)}
 
 /* hero */
 .hero{position:relative;min-height:min(88vh,760px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--ink)}
-.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:zoom 14s ease-out forwards}
+.hero img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover}
 @keyframes zoom{to{transform:scale(1)}}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,22,.25) 0%,rgba(20,20,22,.55) 45%,rgba(20,20,22,.92) 100%)}
 .hero .wrap{position:relative;z-index:1;padding:120px 0 72px}
@@ -149,8 +149,52 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .lb button{position:absolute;background:rgba(255,255,255,.1);border:0;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer}
 .lb .x{top:18px;right:18px}.lb .pv{left:18px;top:50%}.lb .nx{right:18px;top:50%}
 
-.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .rv.in{opacity:1;transform:none}
+
+/* scroll effects */
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:90;background:linear-gradient(90deg,var(--orange),var(--red));transform-origin:0 50%;transform:scaleX(0)}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+.split .w>span{display:inline-block;transform:translateY(105%);transition:transform .9s cubic-bezier(.2,.8,.2,1);transition-delay:calc(var(--i)*55ms)}
+.split.in .w>span{transform:none}
+.svc .ph{clip-path:inset(0 0 100% 0);transition:clip-path 1.1s cubic-bezier(.7,0,.2,1) calc(var(--d,0s) + .1s)}
+.svc.in .ph{clip-path:inset(0 0 0 0)}
+.tile.rv{transform:translateY(40px) scale(.96)}
+.tile.rv.in{transform:none}
+[data-speed]{will-change:transform}
+
+.band{position:relative;height:clamp(420px,70vh,640px);overflow:hidden;display:grid;place-items:center;color:#fff;text-align:center}
+.band img{position:absolute;left:0;top:-20%;width:100%;height:140%;object-fit:cover}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(20,20,22,.45),rgba(20,20,22,.85))}
+.band .wrap{position:relative;z-index:1}
+.band h2{font-size:clamp(2.2rem,6vw,4.6rem);font-weight:800;max-width:16ch;margin:18px auto 0}
+.band h2 em{font-style:normal;color:var(--orange)}
+.band .eyebrow{color:#fff;justify-content:center}
+
+.marquee{overflow:hidden;padding:34px 0;background:var(--bg);border-block:1px solid var(--line)}
+.marquee .track{display:flex;gap:48px;white-space:nowrap;font:800 clamp(2.4rem,7vw,5.6rem)/1 Archivo;letter-spacing:-.02em;will-change:transform}
+.marquee .track span{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.marquee .track span:nth-child(3n+2){color:var(--ink);-webkit-text-stroke:0}
+.marquee .track span:nth-child(3n+3){background:linear-gradient(90deg,var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0}
+
+.process{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.process .media{position:sticky;top:110px;height:min(72vh,560px);border-radius:20px;overflow:hidden;background:var(--ink)}
+.process .media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity .7s,transform 1.2s}
+.process .media img.on{opacity:1;transform:none}
+.process .media .ix{position:absolute;left:24px;bottom:20px;z-index:1;color:#fff;font:800 4.5rem/1 Archivo;text-shadow:0 4px 24px rgba(0,0,0,.5)}
+.steps{display:flex;flex-direction:column}
+.step{min-height:62vh;display:flex;flex-direction:column;justify-content:center;opacity:.28;transition:opacity .5s;border-left:2px solid var(--line);padding-left:32px;position:relative}
+.step::before{content:"";position:absolute;left:-2px;top:0;width:2px;height:0;background:linear-gradient(var(--orange),var(--red));transition:height .7s}
+.step.on{opacity:1}
+.step.on::before{height:100%}
+.step .n{font:800 .85rem Archivo;color:var(--orange);letter-spacing:.1em}
+.step h3{font-size:clamp(1.6rem,3vw,2.3rem);margin:10px 0 14px}
+.step p{color:var(--mute);max-width:44ch}
+.step .mob{display:none;border-radius:14px;margin-bottom:18px;aspect-ratio:16/10;object-fit:cover;width:100%}
+
+.cta-band{position:relative;overflow:hidden;isolation:isolate}
+.cta-band img{position:absolute;left:0;top:-30%;width:100%;height:160%;object-fit:cover;z-index:-2}
+.cta-band::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(120deg,rgba(242,140,40,.92),rgba(215,38,46,.85))}
 
 @media (max-width:900px){
   .links{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);padding:8px 16px 20px;border-bottom:1px solid var(--line);transform:translateY(-12px);opacity:0;visibility:hidden;transition:transform .3s,opacity .3s,visibility .3s}
@@ -165,11 +209,16 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   section{padding:72px 0}
   .cta-band{padding:32px 24px}
   .mv article{padding:28px}
+  .process{grid-template-columns:1fr;gap:0}
+  .process .media{display:none}
+  .step{min-height:auto;padding:28px 0 28px 22px;opacity:1}
+  .step .mob{display:block}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.tile.rv{opacity:1;transform:none}.split .w>span{transform:none}.svc .ph{clip-path:none}[data-speed]{transform:none!important}}
 </style>
 </head>
 <body>
+<div class="progress" id="progress"></div>
 
 <div class="demo"><b>Demo</b> · propuesta de nuevo sitio para Bloque Ingeniería — diseño por Ulises Naranjo</div>
 
@@ -188,7 +237,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 </header>
 
 <section class="hero" style="padding:0">
-  <img src="img/hero.webp" alt="Estructura de estacionamiento con muro verde">
+  <img src="img/hero.webp" alt="Estructura de estacionamiento con muro verde" data-speed="0.35">
   <div class="wrap">
     <span class="eyebrow">Ciudad de México</span>
     <h1>Construimos con <em>precisión</em> de ingeniería.</h1>
@@ -205,22 +254,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section id="servicios">
   <div class="wrap">
     <div class="head rv">
-      <div><span class="eyebrow">Servicios</span><h2>Todo lo que tu obra necesita, en un solo equipo.</h2></div>
+      <div><span class="eyebrow">Servicios</span><h2 class="split">Todo lo que tu obra necesita, en un solo equipo.</h2></div>
       <p>Acompañamos cada proyecto desde la idea hasta la entrega, con planeación previa y seguimiento puntual.</p>
     </div>
     <div class="services">
       <article class="svc rv">
-        <div class="ph"><img src="img/construccion.webp" alt="Ingenieros revisando planos en obra" loading="lazy"></div>
+        <div class="ph"><img src="img/s-construccion.webp" alt="Edificio en construcción con grúas" loading="lazy"></div>
         <div class="bd"><span class="n">01</span><h3>Construcción</h3>
           <p>Edificación e infraestructura con un proyecto y una planificación definidos antes de iniciar: albañilería, estructuras, fachadas, herrería y pavimentos.</p></div>
       </article>
       <article class="svc rv">
-        <div class="ph"><img src="img/diseno.webp" alt="Planos arquitectónicos y render de fachada" loading="lazy"></div>
+        <div class="ph"><img src="img/s-diseno.webp" alt="Plano arquitectónico con escalímetro" loading="lazy"></div>
         <div class="bd"><span class="n">02</span><h3>Diseño</h3>
           <p>Configuramos la mejor solución antes de construir: planos arquitectónicos, fachadas y propuestas que equilibran función, estética y presupuesto.</p></div>
       </article>
       <article class="svc rv">
-        <div class="ph"><img src="img/control.webp" alt="Programa de obra en diagrama de Gantt" loading="lazy"></div>
+        <div class="ph"><img src="img/s-control.webp" alt="Supervisor revisando la bitácora de obra" loading="lazy"></div>
         <div class="bd"><span class="n">03</span><h3>Control de obra</h3>
           <p>Coordinamos recursos humanos, materiales, equipo y finanzas en un programa definido, cuidando las tres variables clave: costo, calidad y tiempo.</p></div>
       </article>
@@ -228,10 +277,42 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
+<div class="band">
+  <img src="img/band-gruas.webp" alt="" data-speed="0.25" loading="lazy">
+  <div class="wrap">
+    <span class="eyebrow">Nuestro compromiso</span>
+    <h2 class="split">Cuidamos <em>costo</em>, <em>calidad</em> y <em>tiempo</em> en cada etapa.</h2>
+  </div>
+</div>
+
+<section id="proceso">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">Cómo trabajamos</span><h2 class="split">De la idea a la entrega, sin sorpresas.</h2></div>
+      <p>Un proceso claro para que sepas en todo momento en qué va tu obra.</p>
+    </div>
+    <div class="process">
+      <div class="media" id="pmedia">
+        <img class="on" src="img/s-diseno.webp" alt="">
+        <img src="img/s-control.webp" alt="">
+        <img src="img/s-gruas.webp" alt="">
+        <img src="img/s-estructura.webp" alt="">
+        <span class="ix" id="pix">01</span>
+      </div>
+      <div class="steps">
+        <div class="step on"><img class="mob" src="img/s-diseno.webp" alt="" loading="lazy"><span class="n">01</span><h3>Diagnóstico y diseño</h3><p>Escuchamos lo que necesitas, visitamos el sitio y desarrollamos la propuesta y los planos.</p></div>
+        <div class="step"><img class="mob" src="img/s-control.webp" alt="" loading="lazy"><span class="n">02</span><h3>Presupuesto y programa</h3><p>Definimos alcance, costos y un programa de obra con tiempos claros antes de empezar.</p></div>
+        <div class="step"><img class="mob" src="img/s-gruas.webp" alt="" loading="lazy"><span class="n">03</span><h3>Construcción</h3><p>Ejecutamos con nuestro equipo, coordinando materiales, maquinaria y personal en obra.</p></div>
+        <div class="step"><img class="mob" src="img/s-estructura.webp" alt="" loading="lazy"><span class="n">04</span><h3>Control y entrega</h3><p>Supervisamos costo, calidad y tiempo en cada etapa y entregamos la obra terminada.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="nosotros">
   <div class="wrap">
     <div class="head rv">
-      <div><span class="eyebrow" style="color:var(--orange)">Nosotros</span><h2>Transformamos el entorno para el bienestar de las personas.</h2></div>
+      <div><span class="eyebrow" style="color:var(--orange)">Nosotros</span><h2 class="split">Transformamos el entorno para el bienestar de las personas.</h2></div>
       <p>Bloque Ingeniería y Construcción S.A. de C.V. trabaja en equipo, en búsqueda permanente de procesos más productivos y competitivos.</p>
     </div>
     <div class="mv">
@@ -248,10 +329,12 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
+<div class="marquee" aria-hidden="true"><div class="track" id="track"><span>Construcción</span><span>Diseño</span><span>Control de obra</span><span>Construcción</span><span>Diseño</span><span>Control de obra</span><span>Construcción</span><span>Diseño</span><span>Control de obra</span></div></div>
+
 <section id="proyectos">
   <div class="wrap">
     <div class="head rv">
-      <div><span class="eyebrow">Proyectos</span><h2>Obra que habla por nosotros.</h2></div>
+      <div><span class="eyebrow">Proyectos</span><h2 class="split">Obra que habla por nosotros.</h2></div>
       <p>Una selección de trabajos recientes en la Ciudad de México y área metropolitana.</p>
     </div>
     <div class="filters" id="filters">
@@ -291,7 +374,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 <section id="contacto">
   <div class="wrap">
     <div class="head rv">
-      <div><span class="eyebrow">Contacto</span><h2>Platiquemos de tu proyecto.</h2></div>
+      <div><span class="eyebrow">Contacto</span><h2 class="split">Platiquemos de tu proyecto.</h2></div>
       <p>Escríbenos o llámanos y te ayudamos a planear tu obra con un presupuesto claro.</p>
     </div>
     <div class="contact">
@@ -304,6 +387,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
       <div class="map rv"><iframe title="Mapa de oficinas" loading="lazy" src="https://maps.google.com/maps?q=R%C3%ADo%20Misisipi%2049%2C%20Ju%C3%A1rez%2C%20Cuauht%C3%A9moc%2C%2006500%20CDMX&z=16&output=embed"></iframe></div>
     </div>
     <div class="cta-band rv">
+      <img src="img/band-atardecer.webp" alt="" data-speed="0.2" loading="lazy">
       <h3>¿Tienes una obra en puerta? Te enviamos una cotización sin compromiso.</h3>
       <a class="btn" href="https://wa.me/525539152126?text=Hola%2C%20me%20interesa%20cotizar%20una%20obra">Cotizar por WhatsApp</a>
     </div>
@@ -329,8 +413,42 @@ const links=document.getElementById('links');
 document.getElementById('burger').onclick=()=>links.classList.toggle('open');
 links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
 
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
-document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+// títulos palabra por palabra
+document.querySelectorAll('.split').forEach(h=>{
+  let i=0;const wrap=node=>{const w=document.createElement('span'),inner=document.createElement('span');w.className='w';inner.append(node);w.append(inner);w.style.setProperty('--i',i);inner.style.setProperty('--i',i++);return w};
+  [...h.childNodes].forEach(n=>{
+    if(n.nodeType===3){const f=document.createDocumentFragment();n.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;f.append(/^\s+$/.test(t)?document.createTextNode(t):wrap(document.createTextNode(t)))});n.replaceWith(f)}
+    else{const ph=document.createComment('');n.replaceWith(ph);ph.replaceWith(wrap(n))}
+  });
+});
+// escalonar tarjetas y mosaicos
+document.querySelectorAll('.services .svc,.mv article').forEach((el,i)=>el.style.setProperty('--d',(i%3)*.12+'s'));
+document.querySelectorAll('.tile').forEach((el,i)=>{el.classList.add('rv');el.style.setProperty('--d',(i%4)*.08+'s')});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.rv,.split').forEach(el=>io.observe(el));
+
+// pasos del proceso: la imagen fija cambia según el paso visible
+const steps=[...document.querySelectorAll('.step')],pimgs=[...document.querySelectorAll('#pmedia img')],pix=document.getElementById('pix');
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const k=steps.indexOf(e.target);
+  steps.forEach((s,j)=>s.classList.toggle('on',j<=k));pimgs.forEach((im,j)=>im.classList.toggle('on',j===k));pix.textContent=String(k+1).padStart(2,'0')}),{rootMargin:'-45% 0px -45% 0px'});
+steps.forEach(s=>so.observe(s));
+
+// parallax, barra de progreso, letrero que corre con el scroll y salida del hero
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const par=[...document.querySelectorAll('[data-speed]')],bar=document.getElementById('progress'),track=document.getElementById('track'),heroTxt=document.querySelector('.hero .wrap');
+let ticking=false;
+function frame(){
+  ticking=false;const y=scrollY,vh=innerHeight,max=document.documentElement.scrollHeight-vh;
+  bar.style.transform=`scaleX(${max>0?y/max:0})`;
+  if(reduce)return;
+  par.forEach(el=>{const r=el.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;
+    const c=r.top+r.height/2-vh/2;el.style.transform=`translate3d(0,${(-c*+el.dataset.speed).toFixed(1)}px,0)`});
+  if(y<vh){heroTxt.style.transform=`translate3d(0,${y*.25}px,0)`;heroTxt.style.opacity=Math.max(0,1-y/(vh*.75))}
+  const mr=track.parentElement.getBoundingClientRect();if(mr.bottom>0&&mr.top<vh)track.style.transform=`translate3d(${(mr.top-vh)*.6}px,0,0)`;
+}
+addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});
+addEventListener('resize',frame);frame();
 
 const tiles=[...document.querySelectorAll('.tile')];
 document.getElementById('filters').onclick=e=>{
