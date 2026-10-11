@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bloque Ingeniería y Construcción</title>
+<meta name="description" content="Bloque Ingeniería y Construcción S.A. de C.V. — construcción, diseño y control de obra en la Ciudad de México.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="img/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --orange:#f28c28; --red:#d7262e; --ink:#1f2023; --char:#2e2f33; --mute:#6b6e75;
+  --bg:#f6f5f2; --card:#fff; --line:#e4e2dc; --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:Archivo,Inter,sans-serif;line-height:1.1;letter-spacing:-.01em}
+.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font:600 .78rem/1 Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.eyebrow::before{content:"";width:28px;height:3px;background:linear-gradient(90deg,var(--orange),var(--red))}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:600;transition:transform .2s,box-shadow .2s,background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-main{background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;box-shadow:0 10px 24px -10px rgba(215,38,46,.7)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.5);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+.btn svg{width:18px;height:18px}
+
+/* demo ribbon */
+.demo{background:var(--ink);color:#fff;text-align:center;font-size:.8rem;padding:7px 16px}
+.demo b{color:var(--orange)}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(246,245,242,.85);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+header.scrolled{border-color:var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:42px;height:42px;border-radius:8px;mix-blend-mode:multiply}
+.brand span{font:800 1.05rem/1.05 Archivo}
+.brand small{display:block;font:500 .7rem/1.2 Inter;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.links{display:flex;gap:30px;font-weight:500;font-size:.95rem}
+.links a{position:relative;padding:6px 0}
+.links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--red);transition:width .25s}
+.links a:hover::after{width:100%}
+.nav .btn{padding:10px 18px;font-size:.9rem}
+.burger{display:none;background:none;border:0;width:44px;height:44px;cursor:pointer}
+.burger span{display:block;width:22px;height:2px;background:var(--ink);margin:5px auto;transition:.3s}
+
+/* hero */
+.hero{position:relative;min-height:min(88vh,760px);display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:var(--ink)}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:zoom 14s ease-out forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,20,22,.25) 0%,rgba(20,20,22,.55) 45%,rgba(20,20,22,.92) 100%)}
+.hero .wrap{position:relative;z-index:1;padding:120px 0 72px}
+.hero .eyebrow{color:#fff}
+.hero h1{font-size:clamp(2.4rem,6.4vw,5rem);font-weight:800;max-width:14ch;margin:18px 0 20px}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--orange),#ff5a4f);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.12rem;max-width:52ch;color:rgba(255,255,255,.85)}
+.hero .cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.pillars{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.18);margin-top:56px}
+.pillars div{padding:20px 0;font:600 .95rem Archivo;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.pillars div::before{content:"";width:8px;height:8px;background:var(--orange);transform:rotate(45deg)}
+
+section{padding:96px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:44px}
+.head h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-top:14px;max-width:18ch}
+.head p{max-width:46ch;color:var(--mute)}
+
+/* services */
+.services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.svc{background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--line);transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column}
+.svc:hover{transform:translateY(-6px);box-shadow:0 24px 40px -24px rgba(0,0,0,.35)}
+.svc .ph{aspect-ratio:4/3;overflow:hidden;background:#ddd}
+.svc .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.svc:hover .ph img{transform:scale(1.06)}
+.svc .bd{padding:26px}
+.svc .n{font:800 .85rem Archivo;color:var(--orange)}
+.svc h3{font-size:1.45rem;margin:6px 0 10px}
+.svc p{color:var(--mute);font-size:.96rem}
+
+/* about */
+.about{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.about::before{content:"";position:absolute;right:-140px;top:-140px;width:420px;height:420px;border:60px solid rgba(242,140,40,.08);transform:rotate(45deg)}
+.about .head p{color:rgba(255,255,255,.65)}
+.mv{display:grid;grid-template-columns:1fr 1fr;gap:22px;position:relative}
+.mv article{border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:36px;background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,0))}
+.mv h3{font-size:1.6rem;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.mv h3 i{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,var(--orange),var(--red))}
+.mv h3 svg{width:20px;height:20px;stroke:#fff}
+.mv p{color:rgba(255,255,255,.75)}
+.values{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.values span{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:8px 16px;font-size:.88rem;color:rgba(255,255,255,.85)}
+
+/* projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.filters button{font:500 .9rem Inter;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:9px 16px;cursor:pointer;transition:.2s;color:var(--ink)}
+.filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:220px;gap:14px}
+.tile{position:relative;border-radius:12px;overflow:hidden;cursor:zoom-in;background:#ccc;transition:opacity .3s}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile.wide{grid-column:span 2}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.tile:hover img{transform:scale(1.07)}
+.tile figcaption{position:absolute;inset:auto 0 0 0;padding:40px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font:600 .95rem Archivo}
+.tile figcaption small{display:block;font:500 .72rem Inter;letter-spacing:.1em;text-transform:uppercase;color:var(--orange)}
+.tile.hide{display:none}
+
+/* clients */
+.clients{padding:64px 0;border-block:1px solid var(--line);background:var(--card)}
+.clients .wrap{display:flex;align-items:center;gap:40px;flex-wrap:wrap;justify-content:space-between}
+.clients h3{font:600 .8rem Inter;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.logos{display:flex;align-items:center;gap:48px;flex-wrap:wrap}
+.logos img{height:46px;width:auto;filter:grayscale(1);opacity:.7;transition:.3s}
+.logos img:hover{filter:none;opacity:1}
+
+/* contact */
+.contact{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:stretch}
+.cards{display:grid;gap:14px}
+.ci{display:flex;gap:16px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;transition:border-color .2s}
+a.ci:hover{border-color:var(--orange)}
+.ci i{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#fdeee0}
+.ci svg{width:20px;height:20px;stroke:var(--red)}
+.ci small{display:block;color:var(--mute);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+.ci b{font-weight:600}
+.map{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);min-height:380px}
+.map iframe{width:100%;height:100%;min-height:380px;border:0;filter:grayscale(.3)}
+
+.cta-band{margin-top:64px;border-radius:20px;padding:44px;background:linear-gradient(135deg,var(--orange),var(--red));color:#fff;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta-band h3{font-size:clamp(1.5rem,3vw,2.1rem);max-width:22ch}
+.cta-band .btn{background:#fff;color:var(--red)}
+
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:36px 0;font-size:.88rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+.wa{position:fixed;right:18px;bottom:18px;z-index:60;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.45);transition:transform .2s}
+.wa:hover{transform:scale(1.08)}
+.wa svg{width:30px;height:30px;fill:#fff}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(10,10,12,.94);display:none;align-items:center;justify-content:center;padding:24px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:82vh;border-radius:10px}
+.lb p{position:absolute;bottom:22px;left:0;right:0;text-align:center;color:#fff;font:600 1rem Archivo}
+.lb button{position:absolute;background:rgba(255,255,255,.1);border:0;color:#fff;width:48px;height:48px;border-radius:50%;font-size:1.5rem;cursor:pointer}
+.lb .x{top:18px;right:18px}.lb .pv{left:18px;top:50%}.lb .nx{right:18px;top:50%}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+
+@media (max-width:900px){
+  .links{position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--bg);padding:8px 16px 20px;border-bottom:1px solid var(--line);transform:translateY(-12px);opacity:0;visibility:hidden;transition:transform .3s,opacity .3s,visibility .3s}
+  .links.open{transform:none;opacity:1;visibility:visible}
+  .links a{padding:14px 0;border-bottom:1px solid var(--line)}
+  .nav .btn{display:none}
+  .burger{display:block}
+  .services,.mv,.contact{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
+  .pillars{grid-template-columns:1fr;margin-top:36px}
+  .pillars div{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  section{padding:72px 0}
+  .cta-band{padding:32px 24px}
+  .mv article{padding:28px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<div class="demo"><b>Demo</b> · propuesta de nuevo sitio para Bloque Ingeniería — diseño por Ulises Naranjo</div>
+
+<header id="top">
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="img/logo.jpg" alt="Logo Bloque"><span>BLOQUE<small>Ingeniería y Construcción</small></span></a>
+    <nav class="links" id="links">
+      <a href="#servicios">Servicios</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-main" href="#contacto">Cotiza tu obra</a>
+    <button class="burger" id="burger" aria-label="Menú"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero" style="padding:0">
+  <img src="img/hero.webp" alt="Estructura de estacionamiento con muro verde">
+  <div class="wrap">
+    <span class="eyebrow">Ciudad de México</span>
+    <h1>Construimos con <em>precisión</em> de ingeniería.</h1>
+    <p>Diseño, construcción y control de obra para proyectos comerciales, públicos y residenciales. Cuidamos costo, calidad y tiempo de principio a fin.</p>
+    <div class="cta">
+      <a class="btn btn-main" href="#contacto">Solicitar cotización
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-ghost" href="#proyectos">Ver proyectos</a>
+    </div>
+    <div class="pillars"><div>Construcción</div><div>Diseño</div><div>Control de obra</div></div>
+  </div>
+</section>
+
+<section id="servicios">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">Servicios</span><h2>Todo lo que tu obra necesita, en un solo equipo.</h2></div>
+      <p>Acompañamos cada proyecto desde la idea hasta la entrega, con planeación previa y seguimiento puntual.</p>
+    </div>
+    <div class="services">
+      <article class="svc rv">
+        <div class="ph"><img src="img/construccion.webp" alt="Ingenieros revisando planos en obra" loading="lazy"></div>
+        <div class="bd"><span class="n">01</span><h3>Construcción</h3>
+          <p>Edificación e infraestructura con un proyecto y una planificación definidos antes de iniciar: albañilería, estructuras, fachadas, herrería y pavimentos.</p></div>
+      </article>
+      <article class="svc rv">
+        <div class="ph"><img src="img/diseno.webp" alt="Planos arquitectónicos y render de fachada" loading="lazy"></div>
+        <div class="bd"><span class="n">02</span><h3>Diseño</h3>
+          <p>Configuramos la mejor solución antes de construir: planos arquitectónicos, fachadas y propuestas que equilibran función, estética y presupuesto.</p></div>
+      </article>
+      <article class="svc rv">
+        <div class="ph"><img src="img/control.webp" alt="Programa de obra en diagrama de Gantt" loading="lazy"></div>
+        <div class="bd"><span class="n">03</span><h3>Control de obra</h3>
+          <p>Coordinamos recursos humanos, materiales, equipo y finanzas en un programa definido, cuidando las tres variables clave: costo, calidad y tiempo.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="nosotros">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow" style="color:var(--orange)">Nosotros</span><h2>Transformamos el entorno para el bienestar de las personas.</h2></div>
+      <p>Bloque Ingeniería y Construcción S.A. de C.V. trabaja en equipo, en búsqueda permanente de procesos más productivos y competitivos.</p>
+    </div>
+    <div class="mv">
+      <article class="rv">
+        <h3><i><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg></i>Misión</h3>
+        <p>La transformación del entorno para el bienestar del ser humano es nuestro principal aporte a la sociedad. Con esta meta trabajamos en equipo, en permanente búsqueda de procesos que nos permitan ser más productivos y competitivos, obteniendo mayores beneficios para nuestros clientes, colaboradores y nuestra propia razón de ser.</p>
+      </article>
+      <article class="rv">
+        <h3><i><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></i>Visión</h3>
+        <p>Ser reconocidos en el mercado como una empresa líder de construcción, que piensa, desarrolla y entrega productos y servicios de calidad, con un absoluto compromiso con sus clientes, siendo sensibles a lo que ellos desean y necesitan, brindándoles confianza y seguridad.</p>
+      </article>
+    </div>
+    <div class="values rv"><span>Calidad</span><span>Compromiso</span><span>Seguridad</span><span>Trabajo en equipo</span><span>Confianza</span></div>
+  </div>
+</section>
+
+<section id="proyectos">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">Proyectos</span><h2>Obra que habla por nosotros.</h2></div>
+      <p>Una selección de trabajos recientes en la Ciudad de México y área metropolitana.</p>
+    </div>
+    <div class="filters" id="filters">
+      <button class="on" data-f="*">Todos</button>
+      <button data-f="edif">Edificación</button>
+      <button data-f="acab">Fachadas y herrería</button>
+      <button data-f="urb">Obra urbana</button>
+    </div>
+    <div class="grid" id="grid">
+      <figure class="tile big" data-c="edif"><img src="img/vet-1.webp" alt="" loading="lazy"><figcaption><small>Edificación</small>Clínica veterinaria Petzoa</figcaption></figure>
+      <figure class="tile" data-c="acab"><img src="img/herreria.webp" alt="" loading="lazy"><figcaption><small>Herrería</small>Herrería para muro verde</figcaption></figure>
+      <figure class="tile" data-c="acab"><img src="img/fachada.webp" alt="" loading="lazy"><figcaption><small>Acabados</small>Pintura en fachadas</figcaption></figure>
+      <figure class="tile wide" data-c="edif"><img src="img/vet-2.webp" alt="" loading="lazy"><figcaption><small>Edificación</small>Clínica veterinaria · fachada</figcaption></figure>
+      <figure class="tile" data-c="urb"><img src="img/muro.webp" alt="" loading="lazy"><figcaption><small>Estructura</small>Muro de contención</figcaption></figure>
+      <figure class="tile" data-c="edif"><img src="img/albanileria-1.webp" alt="" loading="lazy"><figcaption><small>Albañilería</small>Albañilería en general</figcaption></figure>
+      <figure class="tile wide" data-c="urb"><img src="img/pavimento-4.webp" alt="" loading="lazy"><figcaption><small>Obra urbana</small>Pavimento hidráulico</figcaption></figure>
+      <figure class="tile" data-c="edif"><img src="img/albanileria-2.webp" alt="" loading="lazy"><figcaption><small>Albañilería</small>Muros y cubierta</figcaption></figure>
+      <figure class="tile" data-c="urb"><img src="img/pavimento-1.webp" alt="" loading="lazy"><figcaption><small>Obra urbana</small>Adocreto y pavimentación</figcaption></figure>
+      <figure class="tile" data-c="urb"><img src="img/pavimento-2.webp" alt="" loading="lazy"><figcaption><small>Obra urbana</small>Demolición y preparación</figcaption></figure>
+      <figure class="tile" data-c="urb"><img src="img/pavimento-3.webp" alt="" loading="lazy"><figcaption><small>Obra urbana</small>Colado de pavimento</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="clients">
+  <div class="wrap">
+    <h3>Han confiado en nosotros</h3>
+    <div class="logos">
+      <img src="img/c-aobregon.png" alt="Alcaldía Álvaro Obregón">
+      <img src="img/c-cineteca.jpg" alt="Cineteca Nacional">
+      <img src="img/c-petzoa.png" alt="Petzoa">
+      <img src="img/c-recal.png" alt="Grupo Recal">
+    </div>
+  </div>
+</div>
+
+<section id="contacto">
+  <div class="wrap">
+    <div class="head rv">
+      <div><span class="eyebrow">Contacto</span><h2>Platiquemos de tu proyecto.</h2></div>
+      <p>Escríbenos o llámanos y te ayudamos a planear tu obra con un presupuesto claro.</p>
+    </div>
+    <div class="contact">
+      <div class="cards">
+        <a class="ci rv" href="https://wa.me/525539152126?text=Hola%2C%20me%20interesa%20cotizar%20una%20obra"><i><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg></i><span><small>WhatsApp / celular</small><b>55 3915 2126</b></span></a>
+        <a class="ci rv" href="tel:+525541643264"><i><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg></i><span><small>Oficina</small><b>55 4164 3264</b></span></a>
+        <a class="ci rv" href="mailto:contacto@bloqueingenieria.com"><i><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i><span><small>Correo</small><b>contacto@bloqueingenieria.com</b></span></a>
+        <div class="ci rv"><i><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></i><span><small>Oficinas</small><b>Río Misisipi 49, piso 14, depto. 1402</b><br>Col. Juárez, Cuauhtémoc, C.P. 06500, CDMX</span></div>
+      </div>
+      <div class="map rv"><iframe title="Mapa de oficinas" loading="lazy" src="https://maps.google.com/maps?q=R%C3%ADo%20Misisipi%2049%2C%20Ju%C3%A1rez%2C%20Cuauht%C3%A9moc%2C%2006500%20CDMX&z=16&output=embed"></iframe></div>
+    </div>
+    <div class="cta-band rv">
+      <h3>¿Tienes una obra en puerta? Te enviamos una cotización sin compromiso.</h3>
+      <a class="btn" href="https://wa.me/525539152126?text=Hola%2C%20me%20interesa%20cotizar%20una%20obra">Cotizar por WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="y"></span> Bloque Ingeniería y Construcción S.A. de C.V.</span>
+    <span>www.bloqueingenieria.com</span>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/525539152126?text=Hola%2C%20me%20interesa%20cotizar%20una%20obra" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.6a10.6 10.6 0 0 1-5.4-1.5l-.4-.2-3.9 1 1-3.8-.3-.4A10.6 10.6 0 1 1 16 26.6zm5.8-7.9c-.3-.2-1.9-.9-2.2-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7.1a8.7 8.7 0 0 1-4.3-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.5l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.6 3.6 0 0 0-1.1 2.7 6.3 6.3 0 0 0 1.3 3.3 14.4 14.4 0 0 0 5.5 4.9c2 .9 2.9 1 3.9.8a3.4 3.4 0 0 0 2.2-1.6 2.8 2.8 0 0 0 .2-1.6c-.1-.1-.3-.2-.7-.4z"/></svg></a>
+
+<div class="lb" id="lb"><button class="x" aria-label="Cerrar">×</button><button class="pv" aria-label="Anterior">‹</button><img alt=""><button class="nx" aria-label="Siguiente">›</button><p></p></div>
+
+<script>
+document.getElementById('y').textContent=new Date().getFullYear();
+const hdr=document.querySelector('header');
+addEventListener('scroll',()=>hdr.classList.toggle('scrolled',scrollY>10),{passive:true});
+const links=document.getElementById('links');
+document.getElementById('burger').onclick=()=>links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const tiles=[...document.querySelectorAll('.tile')];
+document.getElementById('filters').onclick=e=>{
+  const b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('#filters button').forEach(x=>x.classList.toggle('on',x===b));
+  tiles.forEach(t=>t.classList.toggle('hide',b.dataset.f!=='*'&&t.dataset.c!==b.dataset.f));
+};
+
+const lb=document.getElementById('lb'),lbImg=lb.querySelector('img'),lbTxt=lb.querySelector('p');let cur=0;
+const vis=()=>tiles.filter(t=>!t.classList.contains('hide'));
+function show(i){const v=vis();cur=(i+v.length)%v.length;const t=v[cur];lbImg.src=t.querySelector('img').src;lbTxt.textContent=t.querySelector('figcaption').lastChild.textContent;lb.classList.add('on')}
+tiles.forEach(t=>t.onclick=()=>show(vis().indexOf(t)));
+lb.querySelector('.x').onclick=()=>lb.classList.remove('on');
+lb.querySelector('.pv').onclick=e=>{e.stopPropagation();show(cur-1)};
+lb.querySelector('.nx').onclick=e=>{e.stopPropagation();show(cur+1)};
+lb.onclick=e=>{if(e.target===lb)lb.classList.remove('on')};
+addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')lb.classList.remove('on');if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1)});
+</script>
+</body>
+</html>
