@@ -172,8 +172,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .band .eyebrow{color:#fff;justify-content:center}
 
 .marquee{overflow:hidden;padding:34px 0;background:var(--bg);border-block:1px solid var(--line)}
-.marquee .track{display:flex;gap:48px;white-space:nowrap;font:800 clamp(2.4rem,7vw,5.6rem)/1 Archivo;letter-spacing:-.02em;will-change:transform}
-.marquee .track span{color:transparent;-webkit-text-stroke:1.5px var(--ink)}
+.marquee .track{display:flex;width:max-content;white-space:nowrap;animation:marq 38s linear infinite;font:800 clamp(2.4rem,7vw,5.6rem)/1 Archivo;letter-spacing:-.02em;will-change:transform}
+@keyframes marq{to{transform:translate3d(-50%,0,0)}}
+.marquee .g{display:flex}
+.marquee .track span{padding-right:.6em;color:transparent;-webkit-text-stroke:1.5px var(--ink)}
 .marquee .track span:nth-child(3n+2){color:var(--ink);-webkit-text-stroke:0}
 .marquee .track span:nth-child(3n+3){background:linear-gradient(90deg,var(--orange),var(--red));-webkit-background-clip:text;background-clip:text;-webkit-text-stroke:0}
 
@@ -214,7 +216,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   .step{min-height:auto;padding:28px 0 28px 22px;opacity:1}
   .step .mob{display:block}
 }
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.tile.rv{opacity:1;transform:none}.split .w>span{transform:none}.svc .ph{clip-path:none}[data-speed]{transform:none!important}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv,.tile.rv{opacity:1;transform:none}.split .w>span{transform:none}.svc .ph{clip-path:none}.marquee .track{width:auto;flex-wrap:wrap;justify-content:center;white-space:normal;font-size:clamp(1.8rem,5vw,3.4rem)}.marquee .g{flex-wrap:wrap;justify-content:center}.marquee .g+.g,.marquee .g span:nth-child(n+4){display:none}[data-speed]{transform:none!important}}
 </style>
 </head>
 <body>
@@ -329,7 +331,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
   </div>
 </section>
 
-<div class="marquee" aria-hidden="true"><div class="track" id="track"><span>Construcción</span><span>Diseño</span><span>Control de obra</span><span>Construcción</span><span>Diseño</span><span>Control de obra</span><span>Construcción</span><span>Diseño</span><span>Control de obra</span></div></div>
+<div class="marquee" aria-hidden="true"><div class="track" id="track"><div class="g"><span>Construcción</span><span>Diseño</span><span>Control de obra</span><span>Construcción</span><span>Diseño</span><span>Control de obra</span></div><div class="g" aria-hidden="true"><span>Construcción</span><span>Diseño</span><span>Control de obra</span><span>Construcción</span><span>Diseño</span><span>Control de obra</span></div></div></div>
 
 <section id="proyectos">
   <div class="wrap">
@@ -445,7 +447,6 @@ function frame(){
   par.forEach(el=>{const r=el.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>vh)return;
     const c=r.top+r.height/2-vh/2;el.style.transform=`translate3d(0,${(-c*+el.dataset.speed).toFixed(1)}px,0)`});
   if(y<vh){heroTxt.style.transform=`translate3d(0,${y*.25}px,0)`;heroTxt.style.opacity=Math.max(0,1-y/(vh*.75))}
-  const mr=track.parentElement.getBoundingClientRect();if(mr.bottom>0&&mr.top<vh)track.style.transform=`translate3d(${(mr.top-vh)*.6}px,0,0)`;
 }
 addEventListener('scroll',()=>{if(!ticking){ticking=true;requestAnimationFrame(frame)}},{passive:true});
 addEventListener('resize',frame);frame();
